@@ -1,5 +1,9 @@
 var LF = {
 
+  /**
+   * Placeholder for future activies
+   */
+  activities: { },
 
   setCookie: function (name, value, expires, path) {
     // If expires is undefined or is not an instance of the Date object set an empty expire string
@@ -64,7 +68,11 @@ var LF = {
       }
     }
     return obj;
+  },
+  
+  log: function (msg) {
+    if (typeof window.console == 'object') {
+      console.log(msg);
+    }
   }
-
-
 };

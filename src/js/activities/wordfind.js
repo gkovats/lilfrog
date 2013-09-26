@@ -348,7 +348,7 @@ LF.activities.wordfind = {
 
     dom.message = dom.wf.find('div.message');
     dom.message.hide();
-    grid = new LF.games.wordfind.GridBoard(dom.canvas.board, dom.canvas.control, config.width, config.height);
+    grid = new LF.activities.wordfind.GridBoard(dom.canvas.board, dom.canvas.control, config.width, config.height);
 
     // Apply Event handlers to DOM
     // Track mouseclicks on board
@@ -689,8 +689,7 @@ LF.activities.wordfind = {
   init: function( element ) {
     var self = this;
     LF.log( 'Wordsearch: InitWidget.' );
-    var i = this.instances.length;
-    this.instances[i] = new self.Game(element);
+    this.instance = new self.Game(element);
   }
 
 };

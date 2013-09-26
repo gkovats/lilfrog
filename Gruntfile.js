@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     },
     
     watch: {
-      files: ['<%= dir.src.js %>/**.js', '<%= dir.src.sass %>/**.scss'],
+      files: ['<%= dir.src.js %>/**', '<%= dir.src.sass %>/**'],
       tasks: ['concat:dev', 'sass:dev'],
       options: { }
     },
