@@ -1,0 +1,32 @@
+@import "bootstrap/bootstrap";
+@import "bootstrap/bootstrap-responsive";
+
+$lt-green: #84d178;
+$dk-green: #1e750e;
+$orange: #f26c05;
+
+// Apply a natural box layout model to all elements: http://paulirish.com/2012/box-sizing-border-box-ftw
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.chromeframe {position: absolute; top: 0;}
+
+body, select, input, textarea {
+  color: #222;
+  font: 16px sans-serif, arial, helvetica;
+}
+
+// HEADER
+header {
+  background: $lt-green;
+  height: 220px;
+}
+
+// Print styles
+@media print {
+
+}
+
+// Media queries! 
+@media screen and (max-width: 480px) {
+
+}

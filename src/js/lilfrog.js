@@ -1,7 +1,5 @@
 var LF = {
 
-  
-
 
   setCookie: function (name, value, expires, path) {
     // If expires is undefined or is not an instance of the Date object set an empty expire string
