@@ -65,20 +65,32 @@ module.exports = function(grunt) {
       // Dev
       dev: {
         options: { style: 'expanded' },
-        files: { '<%= dir.dist.css %>/lilfrog.css' : 'src/sass/lilfrog.scss' }
+        files: { '<%= dir.dist.css %>/lilfrog.css' : '<%= dir.src.sass %>/lilfrog.scss' }
       },
       dist: {
         options: { style: 'compressed' },
-        files: { '<%= dir.dist.css %>/lilfrog.css' : 'src/sass/lilfrog.scss' }
+        files: { '<%= dir.dist.css %>/lilfrog.css' : '<%= dir.src.sass %>/lilfrog.scss' }
       }      
     },
     
     watch: {
-      files: ['src/js/**.js', 'src/sass/**.scss'],
+      files: ['<%= dir.src.js %>/**.js', '<%= dir.src.sass %>/**.scss'],
       tasks: ['concat:dev', 'sass:dev'],
       options: { }
-    }  
-
+    },
+    
+    // Copy images
+        
+    copy: {
+      main: {
+        cwd: '<%= dir.src.img %>/',
+        expand: true, 
+        src: '**', 
+        dest: '<%= dir.dist.img %>/', 
+        filter: 'isFile'
+      }
+    }
+    
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -86,7 +98,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('dev', ['concat:dev', 'sass:dev', 'watch']);
-  grunt.registerTask('dist', ['concat:dist', 'uglify:dist', 'sass:dist']);
+  grunt.registerTask('dev', ['copy', 'concat:dev', 'sass:dev', 'watch']);
+  grunt.registerTask('dist', ['copy', 'concat:dist', 'uglify:dist', 'sass:dist']);
 };
