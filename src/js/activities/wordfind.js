@@ -264,9 +264,9 @@ LF.activities.wordfind = {
         return false;
       }
       // game is complete
-      dom.message.html('<p>You\'ve completed this board. </p><button>Start New Game</button>');
-      dom.message.show();
-      dom.message.find('button').on('click', function(e){
+      dom.dialog.html('<p>You\'ve completed this board. </p><button>Start New Game</button>');
+      dom.dialog.show();
+      dom.dialog.find('button').on('click', function(e){
         e.preventDefault();
         startNewGame();
       });
@@ -281,7 +281,7 @@ LF.activities.wordfind = {
     function startNewGame(words){
       // Init grid
       wordsLeft = 0;
-      dom.message.hide(); // hide any dialog
+      dom.dialog.hide(); // hide any dialog
       grid.reset();
       var wordLists = [
         ['blueberry muffin' ,'peanut brittle' ,'custard' ,'trifle' ,'yellow cake' ,'pastry' ,'icing' ,'sponge cake' ,'sweet potato pie' ,'scone' ,'fortune cookie' ,'parfait' ,'jellyroll' ,'doughnut' ,'sherbet' ,'truffle' ,'sorbet' ,'torte' ,'caramel apple' ,'bombe' ,'fudge' ,'banana split' ,'red velvet cake' ,'cherry pie' ,'eclair' ,'ladyfingers' ,'lemon bars' ,'marshmallow' ,'snickerdoodle' ,'biscotti'],
@@ -330,7 +330,7 @@ LF.activities.wordfind = {
     dom.wf = $(element);
     dom.wf.addClass('wordfind');
     // Build needed elements and then add DOM pointers
-    dom.wf.html('<div class="header"></div><div class="gridboard"></div><div class="words"></div><div class="message"></div>');
+    dom.wf.html('<div class="header"></div><div class="gridboard"></div><div class="words"></div><div class="dialog"></div>');
     dom.grid = dom.wf.find('.gridboard');
     dom.grid.html('<canvas class="board"></canvas><canvas class="control"></canvas>')
     dom.canvas = {
@@ -345,9 +345,8 @@ LF.activities.wordfind = {
     dom.header.time = dom.header.find('span.time');
     dom.header.points = dom.header.find('span.points');
     dom.header.message = dom.header.find('span.message');
-
-    dom.message = dom.wf.find('div.message');
-    dom.message.hide();
+    dom.dialog = dom.wf.find('div.dialog');
+    dom.dialog.hide();
     grid = new LF.activities.wordfind.GridBoard(dom.canvas.board, dom.canvas.control, config.width, config.height);
 
     // Apply Event handlers to DOM
@@ -357,9 +356,9 @@ LF.activities.wordfind = {
       mouseTrack(event);
     });
 
-    dom.message.html('<p>Score by finding words from the list on the right in the grid below. Words can run in any direction.</p><button>Start New Game</button>');
-    dom.message.show();
-    dom.message.find('button').on('click', function(e){
+    dom.dialog.html('<p>Score by finding words from the list on the right in the grid below. Words can run in any direction.</p><button>Start New Game</button>');
+    dom.dialog.show();
+    dom.dialog.find('button').on('click', function(e){
       startNewGame();
     });
 
