@@ -1,6 +1,9 @@
 /.sass-cache
 /node_modules
 /_
-/dist
+/www/dist
+/www/tmp
 /tmp
 .project
+.ftpauth
+.ftppass

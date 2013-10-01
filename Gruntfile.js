@@ -13,9 +13,9 @@ module.exports = function(grunt) {
         img:    'src/img'
       },
       dist: {
-        js: 'dist/js',
-        css: 'dist/css',
-        img: 'dist/img'
+        js: 'www/dist/js',
+        css: 'www/dist/css',
+        img: 'www/dist/img'
       }
     },
     
@@ -25,6 +25,7 @@ module.exports = function(grunt) {
       '<%= dir.src.jslib %>/bootstrap.min.js'
     ],
     
+    // Minify, for the user's sake
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> v<%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -36,6 +37,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Concat libraries
     concat: {
       options: { separator: ';' },
       dev: {
@@ -61,6 +63,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Clean CSS
     sass: {
       // Dev
       dev: {
@@ -73,6 +76,7 @@ module.exports = function(grunt) {
       }      
     },
     
+    // Monitoring for Development
     watch: {
       files: ['<%= dir.src.js %>/**', '<%= dir.src.sass %>/**'],
       tasks: ['concat:dev', 'sass:dev'],
@@ -80,7 +84,6 @@ module.exports = function(grunt) {
     },
     
     // Copy images
-        
     copy: {
       main: {
         cwd: '<%= dir.src.img %>/',
@@ -99,7 +102,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-ftpush');
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('dev', ['copy', 'concat:dev', 'sass:dev', 'watch']);
-  grunt.registerTask('dist', ['copy', 'concat:dist', 'uglify:dist', 'sass:dist']);
+  grunt.registerTask('dist', ['copy', 'concat:dist', 'uglify:dist', 'sass:dist', 'ftp_push:dist']);
 };
