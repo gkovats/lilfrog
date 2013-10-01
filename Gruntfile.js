@@ -92,7 +92,22 @@ module.exports = function(grunt) {
         dest: '<%= dir.dist.img %>/', 
         filter: 'isFile'
       }
-    }
+    },
+    
+    // Addign ftp to script
+    ftpush: {
+      dist: {
+        auth: {
+          host: 'ftp.georgekovats.com',
+          port: 21,
+          authKey: 'lilfrog'
+        },
+        src: 'www',
+        dest: '',
+        exclusions: ['www/tmp'],
+        keep: ['work']
+      }
+    }    
     
   });
 
@@ -105,5 +120,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-ftpush');
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('dev', ['copy', 'concat:dev', 'sass:dev', 'watch']);
-  grunt.registerTask('dist', ['copy', 'concat:dist', 'uglify:dist', 'sass:dist', 'ftp_push:dist']);
+  grunt.registerTask('dist', ['copy', 'concat:dist', 'uglify:dist', 'sass:dist', 'ftpush:dist']);
 };
