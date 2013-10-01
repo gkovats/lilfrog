@@ -4,6 +4,7 @@
 /www/dist
 /www/tmp
 /tmp
+/.grunt
 .project
 .ftpauth
 .ftppass
