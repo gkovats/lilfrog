@@ -24,20 +24,25 @@ $orange: #f26c05;
   // HEADER
   header {
     background: $ft-green;
-    height: 130px;
+    height: 100px;
     margin: 0;
     width: auto;
-    
+    position: relative;
     .logo {
-      width: 292px;
-      height: 152px;
+      width: 263px;
+      height: 101px;
       position: absolute;
       left: 50%;
-      margin-left: -146px;
-      top: 5px;
+      margin-left: -100px;
+      top: 10px;
       cursor: pointer;
     }
-    
+  }
+
+  // Content
+  #activity-stage {
+    width: 1000px;
+    margin: 10px auto;    
   }
   
   footer {

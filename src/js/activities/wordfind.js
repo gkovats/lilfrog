@@ -41,8 +41,8 @@ LF.activities.wordfind = {
      * Configuration params with defaults
      */
     config = {
-      height: 16, // height in grid squares
-      width: 16, // width in grid squares
+      height: 12, // height in grid squares
+      width: 12, // width in grid squares
       words: [] // on init, this gets transferred to the words property
     },
 
@@ -76,7 +76,6 @@ LF.activities.wordfind = {
       var self = this, line;
       word = rawWord.toLowerCase().replace(/\W+/g,'');
       line = grid.loadWord(word);
-
       if (!line) { return false; }
       words[word] = {
         line: line,
@@ -264,7 +263,7 @@ LF.activities.wordfind = {
         return false;
       }
       // game is complete
-      dom.dialog.html('<p>You\'ve completed this board. </p><button>Start New Game</button>');
+      dom.dialog.html('<p>You\'ve completed this board. </p><button class="btn-large">Start New Game</button>');
       dom.dialog.show();
       dom.dialog.find('button').on('click', function(e){
         e.preventDefault();
@@ -330,7 +329,7 @@ LF.activities.wordfind = {
     dom.wf = $(element);
     dom.wf.addClass('wordfind');
     // Build needed elements and then add DOM pointers
-    dom.wf.html('<div class="header"></div><div class="gridboard"></div><div class="words"></div><div class="dialog"></div>');
+    dom.wf.html('<div class="header"/><div class="gridboard"/><div class="words"/><div class="dialog"/>');
     dom.grid = dom.wf.find('.gridboard');
     dom.grid.html('<canvas class="board"></canvas><canvas class="control"></canvas>')
     dom.canvas = {
@@ -341,7 +340,7 @@ LF.activities.wordfind = {
 
     // Header elements
     dom.header = dom.wf.find('.header');
-    dom.header.html('<span class="time"></span><span class="points"></span><span class="message"></span>');
+    dom.header.html('<span class="time"/><span class="points"/><span class="message"/>');
     dom.header.time = dom.header.find('span.time');
     dom.header.points = dom.header.find('span.points');
     dom.header.message = dom.header.find('span.message');
@@ -356,7 +355,7 @@ LF.activities.wordfind = {
       mouseTrack(event);
     });
 
-    dom.dialog.html('<p>Score by finding words from the list on the right in the grid below. Words can run in any direction.</p><button>Start New Game</button>');
+    dom.dialog.html('<p>Score by finding words from the list on the right in the grid below. Words can run in any direction.</p><button class="btn-large">Start New Game</button>');
     dom.dialog.show();
     dom.dialog.find('button').on('click', function(e){
       startNewGame();
@@ -386,7 +385,7 @@ LF.activities.wordfind = {
 
     var self = this,
       gridRows = [],
-      cellSize = 30, // pixel height and width of cells
+      cellSize = 35, // pixel height and width of cells
       hCellSize = cellSize / 2, // half cellSize
       tryCap = 500,
       pWidth = cellSize * width,
@@ -540,7 +539,7 @@ LF.activities.wordfind = {
           letter, html = '',
           ph, pw;
 
-        canvas.board.font = "bold 20px sans-serif";
+        canvas.board.font = "bold 24px sans-serif";
         canvas.board.textAlign = "center";
         canvas.board.textBaseline = "middle";
         // Render canvas
@@ -686,9 +685,9 @@ LF.activities.wordfind = {
   },
 
   init: function( element ) {
-    var self = this;
-    LF.log( 'Wordsearch: InitWidget.' );
-    this.instance = new self.Game(element);
+  	var stage = $('#activity-stage');
+  	var wordfind = stage.html('<div id="wordfind"/>').find('#wordfind');
+    this.instance = new this.Game(wordfind);
   }
 
 };
