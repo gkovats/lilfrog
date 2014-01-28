@@ -1,18 +1,23 @@
 <?php
 
-  define('ROOT', $_SERVER['DOCUMENT_ROOT']);
+    define('WWW_ROOT', realpath($_SERVER['DOCUMENT_ROOT']));
+    define('ROOT', str_replace('www','',WWW_ROOT));
+    
+    require ROOT.'lib/Toro.php';
+    require ROOT.'lib/rain.tpl.class.php';
+    RainTPL::$tpl_dir       = ROOT."ui/"; // template directory
+    RainTPL::$cache_dir     = ROOT."tmp/"; // cache directory   
+    RainTPL::$path_replace  = false;  
+    
+    function __autoload($class_name) {
+        include ROOT.'classes/'.$class_name . '.php';
+    }   
+ 
+    //$site = new \controllers\Site();
+    //$site->home();
 
-  $f3=require('lib/f3/base.php');
-  $f3->config('config.ini');
-  $f3->set('AUTOLOAD','classes/');
-
-	// $site = new controllers\Site();
-
-
-  // F3 help text
-  // $f3->route('GET /userref', function() { echo View::instance()->render('userref.htm'); } );
-
-  // F3 help text
-  $f3->route('GET /', 'controllers\Site->home' );
-
-  $f3->run();
+    
+    Toro::serve(array(
+        "/"                 => "controllers\Home",
+        "/games/:string"    => "controllers\Games"
+    ));
